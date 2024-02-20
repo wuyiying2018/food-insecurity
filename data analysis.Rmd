@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## R packages
 ```{r,warning=FALSE,message=FALSE}
 # INSTALL PACKAGES
-packages <- c("tidyverse", "dplyr", "knitr", "haven",
+packages <- c("tidyverse", "knitr", "haven","gtsummary",
               "survey", "mice")
 
 # Install missing packages
@@ -39,7 +39,94 @@ dat_fsq<-read_xpt("./data/P_FSQ.XPT")%>%
   janitor::clean_names()%>%
   select(seqn,fsdad)
 
+# input bmi data
+dat_bmi<-read_xpt("./data/P_BMX.XPT")%>%
+  janitor::clean_names()%>%
+  select(seqn,bmxbmi)
+
+#  chronic diseases
+## input hbp data
+dat_hbp<-read_xpt("./data/P_BPQ.XPT")%>%
+  janitor::clean_names()%>%
+  select(seqn,bpq020)
+
+## input diabetes data
+dat_diabetes<-read_xpt("./data/P_DIQ.XPT")%>%
+  janitor::clean_names()%>%
+  select(seqn,diq010)
+
+## input ckd data
+dat_ckd<-read_xpt("./data/P_KIQ_U.XPT")%>%
+  janitor::clean_names()%>%
+  select(seqn,kiq022)
+
+# input insurance data
+dat_insr<-read_xpt("./data/P_HIQ.XPT")%>%
+  janitor::clean_names()%>%
+  select(seqn,hiq011)
+
 # combine datasets
 dat <- dat_demo %>% left_join(dat_fsq, by = "seqn")
+dat <- dat %>% left_join(dat_bmi, by="seqn")
+dat <- dat %>% left_join(dat_hbp, by="seqn")
+dat <- dat %>% left_join(dat_diabetes, by="seqn")
+dat <- dat %>% left_join(dat_ckd, by="seqn")
+dat <- dat %>% left_join(dat_insr, by="seqn")
 ```
+
+## data cleaning
+
+**selecting variabes**
+```{r}
+dat<-dat%>%
+  select(
+    # Survey variables 
+    seqn, sdmvpsu,sdmvstra,wtmecprp,
+    
+    # outcome
+    food_security=fsdad,
+    
+    # predictors
+    gender=riagendr, age=ridageyr,
+    race=ridreth3,country_of_birth=dmdborn4,bmi=bmxbmi,
+    education=dmdeduc2,marital_status=dmdmartz, poverty=indfmpir,
+    hbp=bpq020, diabetes=diq010,ckd=kiq022,insurance=hiq011)
+```
+
+
+**combine categories**
+```{r}
+dat <-dat %>% 
+  mutate(
+    # outcome variable
+    ## adult food security, 1=food security, 0=food insecurity
+    food_security =ifelse(food_security==1,1,ifelse(food_security %in% c(2,3,4),0,NA)),
+    
+    # Demographics variables
+    ## age
+    
+  )
+```
+
+**summary table**
+```{r}
+dat %>% 
+  filter(age>=20)%>%
+  select(everything()) %>% 
+  tbl_summary() %>% 
+  bold_labels()
+```
+
+## Define survey design 
+### Define survey design for overall dataset
+```{r}
+nhanes_all <- svydesign(data=dat, id=~sdmvpsu, strata=~sdmvstra
+                          , weights=~wtmecprp, nest=TRUE)
+```
+
+```{r}
+nhanes<-subset(nhanes_all,age >= 20)
+```
+
+
 
