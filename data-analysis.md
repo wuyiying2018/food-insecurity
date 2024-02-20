@@ -1,16 +1,11 @@
----
-title: "data analysis"
-author: "Yiying Wu"
-date: "2024-02-20"
-output: github_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+data analysis
+================
+Yiying Wu
+2024-02-20
 
 ## R packages
-```{r,warning=FALSE,message=FALSE}
+
+``` r
 # INSTALL PACKAGES
 packages <- c("tidyverse", "dplyr", "knitr", "haven",
               "survey", "mice")
@@ -29,7 +24,8 @@ invisible(lapply(packages, library, character.only = TRUE))
 ```
 
 ## data preparation
-```{r,warning=FALSE,message=FALSE}
+
+``` r
 # input demo data
 dat_demo<-read_xpt("./data/P_DEMO.XPT")%>%
   janitor::clean_names()
@@ -42,4 +38,3 @@ dat_fsq<-read_xpt("./data/P_FSQ.XPT")%>%
 # combine datasets
 dat <- dat_demo %>% left_join(dat_fsq, by = "seqn")
 ```
-
