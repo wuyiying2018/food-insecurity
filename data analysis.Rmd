@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r,warning=FALSE,message=FALSE}
 # INSTALL PACKAGES
 packages <- c("tidyverse", "knitr", "haven","gtsummary",
-              "survey", "mice")
+              "survey", "mice","jtools","surveyCV")
 
 # Install missing packages
 installed_packages <- packages %in% rownames(installed.packages())
@@ -93,8 +93,33 @@ dat<-dat%>%
     hbp=bpq020, diabetes=diq010,ckd=kiq022,insurance=hiq011)
 ```
 
+**identify missing data**
+```{r}
+dat <-dat %>% 
+  mutate(
+    # demo
+    ## education
+    education=ifelse(education %in% c(7,9),NA,education),
+    ## marital_status
+    marital_status=ifelse(marital_status %in% c(77,99),NA,marital_status),
+    ## country_of_birth
+    country_of_birth=ifelse(country_of_birth %in% c(77,99),NA,country_of_birth),
+    
+    # chronic disease
+    ## hbp
+    hbp=ifelse(hbp==9,NA,hbp),
+    ## diabetes
+    diabetes=ifelse(diabetes==9,NA,diabetes),
+    ## ckd
+    ckd=ifelse(ckd==9,NA,ckd),
+    
+    #insurance
+    insurance=ifelse(insurance %in% c(7,9),NA,insurance)
+  )
+```
 
-**combine categories**
+
+**recode categorical data**
 ```{r}
 dat <-dat %>% 
   mutate(
@@ -103,10 +128,40 @@ dat <-dat %>%
     food_security =ifelse(food_security==1,1,ifelse(food_security %in% c(2,3,4),0,NA)),
     
     # Demographics variables
-    ## age
+    ## gender
+    female=ifelse(gender==2,1,ifelse(gender==1,0,NA)),
+    ## race
+    race=relevel(as.factor(race), ref ="1"),
+    ## country_of_birth
+    country_of_birth=ifelse(country_of_birth==2,1,ifelse(country_of_birth==1,0,NA)),
+    ## education
+    education=relevel(as.factor(education), ref ="1"),
+    ## marital_status
+    marital_status=relevel(as.factor(marital_status), ref ="1"),
+    
+    # chronic disease
+    ## hbp
+    hbp=ifelse(hbp==1,1,ifelse(hbp==2,0,NA)),
+    ## diabetes
+    diabetes=ifelse(diabetes==1,1,ifelse(diabetes %in% c(2,3),0,NA)),
+    ## ckd
+    ckd=ifelse(ckd==1,1,ifelse(ckd==2,0,NA)),
+    
+    #insurance
+    insurance=ifelse(insurance==1,1,ifelse(insurance==2,0,NA))
+  )
+```
+
+**combine categories**
+```{r}
+dat<-dat%>%
+  mutate(
+    # Demographics variables
+    ## race
     
   )
 ```
+
 
 **summary table**
 ```{r}
@@ -120,13 +175,124 @@ dat %>%
 ## Define survey design 
 ### Define survey design for overall dataset
 ```{r}
-nhanes_all <- svydesign(data=dat, id=~sdmvpsu, strata=~sdmvstra
+svy <- svydesign(data=dat, id=~sdmvpsu, strata=~sdmvstra
                           , weights=~wtmecprp, nest=TRUE)
 ```
 
 ```{r}
-nhanes<-subset(nhanes_all,age >= 20)
+imputation.svy<-subset(svy,age >= 20)
 ```
 
 
+## Doing Imputation and logistic regression at the Same Time
+```{r}
+#create five imputations. The imputations object contains all five
+#complete datasets.
+imputations <- mice(dat, 5, printFlag=FALSE)
 
+lm_svy_mi <- function(formula, design, imputations) {
+  
+  #setting up null objects allows us to easily add results
+  #later
+  b <- se <- R2MF <- R2CU <-NULL
+  aic <- NULL
+  mean.aic <- NULL
+  # AUC <- mean.AUC <-NULL
+  
+  #now loop through our imputations and run the model
+  for(i in 1:imputations$m) {
+    #grab the complete dataset
+    imputation <- complete(imputations, i)
+    
+    #run the model
+    model <- svyglm(formula, design=design,family=quasibinomial)
+    #collect the results
+    b <- cbind(b, coef(model))
+    se <- cbind(se, summary(model)$coef[,2])
+    
+    summ_model <- summ(model)
+      
+    # # McFadden's R-squared
+    R2MF <- attr(summ_model, which = "rsqmc")
+    
+    # # CRagg-Uhler R-squared
+    R2CU <- attr(summ_model, which = "rsq")
+    
+    # AIC
+    aic <- c(aic,(-2) * logLik(model) + 2 * length(coef(model)))
+    
+    # # Logistic Regression AUC calculation
+    #predictions <- predict(model, type = "response")
+    #ROC_res <- roc(imputation.svy$variables$bp_uncontrolled_140_90, predictions)  # Replace with dependent variable
+    #AUC <- c(AUC, auc(ROC_res))
+    
+  }
+  
+  #now pool the results
+  b.pool <- apply(b, 1, mean)
+  between.var <- apply(b, 1, var)
+  within.var <- apply(se^2, 1, mean)
+  se.pool <- sqrt(within.var+between.var+between.var/imputations$m) 
+  lower.ci <- b.pool - 1.96 * se.pool  # Lower bound of 95% CI
+  upper.ci <- b.pool + 1.96 * se.pool  # Upper bound of 95% CI
+  t.pool <- b.pool/se.pool 
+  pvalue.pool <- (1-pnorm(abs(t.pool)))*2 
+  coefficients <- data.frame(b.pool, se.pool, lower.ci, upper.ci, t.pool, pvalue.pool)
+  
+  #we can also grap n and p from the last model since 
+  #they should be the same across all iterations
+  n <- nobs(model)
+  p <- length(model$coefficients)-1
+  mean.R2MF <- mean(R2MF)
+  mean.R2CU <- mean(R2CU)
+  mean.aic <- mean(aic)
+  #mean.AUC <- mean(AUC)
+  
+  #return everything in a list
+  return(list(coef=coefficients,
+              n=n,
+              R2MF = mean.R2MF,
+              R2CU = mean.R2CU,
+              aic = mean.aic
+              )
+         )
+}
+```
+
+
+```{r}
+#now lets try the model out
+model1 <- lm_svy_mi(food_security~gender+age+
+    race+country_of_birth+bmi+
+    education+marital_status+ poverty+
+    hbp+ diabetes+ckd+insurance, imputation.svy,imputations)
+
+model1
+```
+
+save the result
+```{r}
+## create result dataframe
+res_df<-function(model){
+    coef.names = rownames(model$coef)
+    OR = exp(model$coef$b.pool)
+    ci.low = exp(model$coef$lower.ci)
+    ci.up = exp(model$coef$upper.ci)
+    res<-data_frame(coef.names,OR,ci.low,ci.up)
+    return(res)
+}
+res_m1<-res_df(model1)
+
+# save res
+write.csv(res_m1, "./result_files/res_m1.csv")
+```
+
+
+## for the machine learning model
+plan to use the `surveyCV` package
+
+https://github.com/ColbyStatSvyRsch/surveyCV
+
+https://stats.stackexchange.com/questions/238141/two-worlds-collide-using-ml-for-complex-survey-data
+
+https://cran.r-project.org/web/packages/surveyCV/index.html
