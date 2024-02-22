@@ -1,0 +1,201 @@
+---
+title: "First Analysis Write-Up"
+author: "Yiying Wu"
+date: ""
+output: 
+  pdf_document:
+    latex_engine: pdflatex
+header-includes:
+   - \usepackage{mathptmx} # Times New Roman font or similar
+   - \usepackage{setspace} # Package for setting spacing
+   - \usepackage[margin=1in]{geometry} # Adjust page margins if needed
+   - \doublespacing # Command to apply double spacing
+fontsize: 12pt
+classoption: doublespace
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+
+library(gtsummary)
+library(tidyverse)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+```
+
+**Note: All codes are available here**: https://github.com/wuyiying2018/food-insecurity
+
+# 1. Introduction
+
+
+# 2. Methodology
+## 2.1 Data sources
+The dataset I chose is the NHANES 2017-March 2020 dataset. This survey is conducted, and the data is collected by the National Center for Health Statistics (NCHS) from 2017 to March 2020. 
+The NHANES 2019-2020 field operations were suspended in March 2020 due to the COVID-19 pandemic, resulting in incomplete data collection that is not nationally representative. To address this issue and ensure national representativeness, the partially collected 2019-2020 data were merged with the complete 2017-2018 dataset, creating a combined dataset representative of the U.S. civilian non-institutionalized population before the pandemic. The dataset contains demographic, socioeconomic, dietary, and health-related information. 
+
+The target population is adults over 20 years old (includes 20) in U.S.
+
+## 2.2 Weighting the Survey Data
+In NHANES dataset weights are adjusted for selection probability, non-response, and post- stratification to match U.S. population figures. To obtain a valid statistical inference, a domain analysis for the adult subpopulation (age $\ge$ 20) are conducted by using the subset function in the survey package in R.
+
+
+## 2.3 Multiple Imputation
+
+To handle missing data in our NHANES dataset, we utilize Multiple Imputation (MI) to generate multiple datasets by imputing missing values repeatedly. This method retains the advantages of single imputation, such as consistent analyses and data collector’s knowledge, while also accurately reflecting uncertainty and accounting for imputation error. We implemented it using the MICE (Multivariate Imputation by Chained Equations) package in R, which allows for flexible and efficient imputation of missing values. This ensures that the imputed values are plausible and improves statistical efficiency.
+
+## 2.4 Logistic Regression
+
+Given the binary outcome: food security (Yes/No), we chose logistic regression as our statistical model. Suppose there are $n$ covariates $X_i, i=1,\ ...\ n$, the model can be expressed as:
+
+$$
+log(\frac{\pi}{1-\pi})=X\beta = \beta_0+\beta_1X_1+...+\beta_nX_n
+$$
+
+- $\pi$ is the risk
+
+- $\frac{\pi}{1-\pi}$ is the odds
+
+- $\beta_0$ is the log odds for $X_i's=0$
+
+- $\beta_i$ is the log odds ratio per unit change of $X_i$, holding all other covariates fixed
+
+In the logistic regression analysis for survey data, I have integrated multiple imputation and complex survey design in NHANES. Each imputed dataset was then individually analyzed with logistic regression models, incorporating essential survey design elements like stratification and weights via the survey package. Lastly, these results are aggregated to derive final estimates using Rubin’s multiple imputation combining rule (Rubin, 2018).
+
+## 2.5 Machine Learning Method
+
+plan to use the `surveyCV` package
+
+some useful links:
+
+https://github.com/ColbyStatSvyRsch/surveyCV
+
+https://stats.stackexchange.com/questions/238141/two-worlds-collide-using-ml-for-complex-survey-data
+
+https://cran.r-project.org/web/packages/surveyCV/index.html
+
+# 3. Results
+## 3.1 Descriptive Statistics
+\newpage
+\begin{singlespace}
+```{r echo=FALSE, messgae=FALSE, warning=FALSE}
+my_dat <- read_csv("result_files/dat.csv")%>%
+  filter(age>=20)
+
+dat <- my_dat %>%
+  mutate(
+    gender = factor(case_when(
+      female == "1" ~ "female",  
+      female == "0" ~ "male"),
+      levels = c("male", "female")
+    ),
+    food_security= factor(case_when(
+      food_security == "1" ~ "food security",  
+      food_security == "0" ~ "food insecurity"),
+      levels = c("food insecurity", "food security")
+    ),
+    race= factor(case_when(
+      race == "1" ~ "Mexican American",  
+      race == "2" ~ "Other Hispanic",
+      race == "3" ~ "Non-Hispanic White",
+      race == "4" ~ "Non-Hispanic Black",
+      race == "6" ~ "Non-Hispanic Asian",
+      race == "7" ~ "Other Race - Including Multi-Racial"),
+      levels = c("Mexican American", "Other Hispanic","Non-Hispanic White","Non-Hispanic Black","Non-Hispanic Asian","Other Race - Including Multi-Racial")
+    ),
+    not_born_in_us=country_of_birth,
+    education= factor(case_when(
+      education == "1" ~ "Less than 9th grade",  
+      education == "2" ~ "9-11th grade",
+      education == "3" ~ "High school graduate/GED or equivalent",
+      education == "4" ~ "Some college or AA degree",
+      education == "5" ~ "College graduate or above"),
+      levels = c("Less than 9th grade", "9-11th grade","High school graduate/GED or equivalent","Some college or AA degree","College graduate or above")
+    ),
+    marital_status=factor(case_when(
+      marital_status == "1" ~ "Married/Living with Partner",  
+      marital_status == "2" ~ "Widowed/Divorced/Separated",
+      marital_status == "3" ~ "Never married"),
+      levels = c("Married/Living with Partner", "Widowed/Divorced/Separated","Never married")
+    )
+  )
+    
+```
+```{r, echo=FALSE}
+dat %>% 
+  select(food_security,gender,age,
+    race,not_born_in_us,bmi,
+    education,marital_status, poverty,
+    hbp, diabetes,ckd,insurance) %>%
+  tbl_summary(by=food_security) %>%
+  bold_labels() %>%
+  # modify_caption("**Table 1: Summary of Dataset**") %>%
+  as_gt(include = everything()) %>%
+  gt::tab_header("Table 1: Summary of Dataset by Food Security")
+```
+\end{singlespace}
+
+## 3.2 Regression Analysis Results
+```{r echo=FALSE, messgae=FALSE, warning=FALSE}
+res1 <- read_csv("result_files/res_m1.csv")
+```
+
+```{r, echo=FALSE,include=FALSE}
+res1 %>% 
+  select(coef.names,OR,ci.low,ci.up) %>%
+  knitr::kable()
+```
+
+\begingroup
+\setstretch{1.0} 
+|**coef names**  | **OR**|  **CI low**|  **CI up**|
+|:----------------|---------:|---------:|---------:|
+|Intercept        | 0.0865675| 0.0455321| 0.1645858|
+|gender           |  |  |  |
+|\quad male       | ref | ref | ref |
+|\quad female     | 0.8882700| 0.7938057| 0.9939758|
+|age              | 1.0242605| 1.0165347| 1.0320450|
+|race      | | | |
+|\quad Mexican American      | ref| ref| ref|
+|\quad Other Hispanic      | 0.6944784| 0.4787410| 1.0074344|
+|\quad Non-Hispanic White  | 1.6626392| 1.0989956| 2.5153595|
+|\quad Non-Hispanic Black    | 1.1297815| 0.7313368| 1.7453055|
+|\quad Non-Hispanic Asian    | 1.7310878| 1.1105557| 2.6983472|
+|\quad Other Race - Including Multi-Racial    | 0.7473892| 0.3991244| 1.3995402|
+|not born in U.S. | 1.1155619| 0.8022678| 1.5512006|
+|bmi     | 0.9850796| 0.9752864| 0.9949711|
+|education       | | | |
+|\quad Less than 9th grade   | ref| ref| ref|
+|\quad 9-11th grade| 1.3439491| 0.9764702| 1.8497227|
+|\quad High school graduate/GED or equivalent  | 1.6825892| 1.2053256| 2.3488314|
+|\quad Some college or AA degree | 2.1286519| 1.6312931| 2.7776485|
+|\quad College graduate or above  | 3.7148680| 2.7390089| 5.0384081|
+|marital status  | | | |
+|\quad Married/Living with Partner  | ref| ref| ref|
+|\quad Widowed/Divorced/Separated  | 0.7185600| 0.5343786| 0.9662221|
+|\quad Never married | 0.8816866| 0.6728986| 1.1552577|
+|poverty  | 2.0249656| 1.8245303| 2.2474199|
+|hbp    | 0.8545878| 0.6848649| 1.0663715|
+|diabetes     | 0.7961340| 0.5730458| 1.1060710|
+|ckd      | 0.8875632| 0.5684104| 1.3859149|
+|insurance   | 1.2391050| 0.9339267| 1.6440060|
+
+
+\setstretch{2.0} 
+
+
+## 3.3 Machine Learning Results
+
+
+# 4. Conclusion
+
+
+
+\newpage
+# Reference
+Rubin, D.B. (2018). Flexible Imputation of Missing Data, Second Edition. Chapman and Hall/CRC.
+

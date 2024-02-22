@@ -172,6 +172,13 @@ dat %>%
   bold_labels()
 ```
 
+**save the clean dataset**
+```{r}
+# save
+write.csv(dat, "./result_files/dat.csv")
+```
+
+
 ## Define survey design 
 ### Define survey design for overall dataset
 ```{r}
