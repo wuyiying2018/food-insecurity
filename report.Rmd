@@ -1,6 +1,6 @@
 ---
 title: "First Analysis Write-Up"
-author: "Yiying Wu"
+author: "Yiying Wu (yw3996)"
 date: ""
 output: 
   pdf_document:
@@ -35,7 +35,8 @@ library(kableExtra)
 
 # 2. Methodology
 ## 2.1 Data sources
-The dataset I chose is the NHANES 2017-March 2020 dataset. This survey is conducted, and the data is collected by the National Center for Health Statistics (NCHS) from 2017 to March 2020. 
+The dataset used in the report is the NHANES 2017-March 2020 dataset. This survey is conducted, and the data is collected by the National Center for Health Statistics (NCHS) from 2017 to March 2020. 
+
 The NHANES 2019-2020 field operations were suspended in March 2020 due to the COVID-19 pandemic, resulting in incomplete data collection that is not nationally representative. To address this issue and ensure national representativeness, the partially collected 2019-2020 data were merged with the complete 2017-2018 dataset, creating a combined dataset representative of the U.S. civilian non-institutionalized population before the pandemic. The dataset contains demographic, socioeconomic, dietary, and health-related information. 
 
 The target population is adults over 20 years old (includes 20) in U.S.
@@ -77,6 +78,7 @@ https://github.com/ColbyStatSvyRsch/surveyCV
 https://stats.stackexchange.com/questions/238141/two-worlds-collide-using-ml-for-complex-survey-data
 
 https://cran.r-project.org/web/packages/surveyCV/index.html
+
 
 # 3. Results
 ## 3.1 Descriptive Statistics
@@ -121,7 +123,8 @@ dat <- my_dat %>%
       marital_status == "2" ~ "Widowed/Divorced/Separated",
       marital_status == "3" ~ "Never married"),
       levels = c("Married/Living with Partner", "Widowed/Divorced/Separated","Never married")
-    )
+    ),
+    family_income=poverty
   )
     
 ```
@@ -129,7 +132,7 @@ dat <- my_dat %>%
 dat %>% 
   select(food_security,gender,age,
     race,not_born_in_us,bmi,
-    education,marital_status, poverty,
+    education,marital_status, family_income,
     hbp, diabetes,ckd,insurance) %>%
   tbl_summary(by=food_security) %>%
   bold_labels() %>%
@@ -138,6 +141,10 @@ dat %>%
   gt::tab_header("Table 1: Summary of Dataset by Food Security")
 ```
 \end{singlespace}
+
+The provided table summarizes characteristics of individuals divided into two groups based on food security status, with 3,163 facing food insecurity and 5,380 enjoying food security. A closer analysis reveals a similar gender distribution across both groups, a slightly younger median age in the food insecurity group (48 years) compared to the food security group (54 years), and marked differences in racial composition, notably with a higher percentage of Non-Hispanic Black individuals in the food insecurity group. A substantial proportion of the food insecure were not born in the U.S. (32%), which is higher than in the food secure group. Educational attainment varies significantly, with individuals having less education predominantly in the food insecurity group, while higher education levels are more common among those with food security. Marital status also differs, with a greater proportion of married individuals or those living with a partner in the food security group. Economic disparity is evident in the family income levels, with the food security group reporting higher median values. Health-wise, instances of high blood pressure and diabetes are slightly more prevalent in the food security group, although chronic kidney disease remains low in both. Finally, insurance coverage is more widespread in the food security group (89%) compared to the food insecurity group (76%), highlighting a possible link between economic stability and access to healthcare.
+
+\newpage
 
 ## 3.2 Regression Analysis Results
 ```{r echo=FALSE, messgae=FALSE, warning=FALSE}
@@ -152,6 +159,9 @@ res1 %>%
 
 \begingroup
 \setstretch{1.0} 
+\begin{center}
+Table 2: Summary of Regression Coefficients with Odds Ratios and Confidence Intervals
+\end{center}
 |**coef names**  | **OR**|  **CI low**|  **CI up**|
 |:----------------|---------:|---------:|---------:|
 |Intercept        | 0.0865675| 0.0455321| 0.1645858|
@@ -178,15 +188,16 @@ res1 %>%
 |\quad Married/Living with Partner  | ref| ref| ref|
 |\quad Widowed/Divorced/Separated  | 0.7185600| 0.5343786| 0.9662221|
 |\quad Never married | 0.8816866| 0.6728986| 1.1552577|
-|poverty  | 2.0249656| 1.8245303| 2.2474199|
-|hbp    | 0.8545878| 0.6848649| 1.0663715|
+|family income  | 2.0249656| 1.8245303| 2.2474199|
+|high blood pressure,    | 0.8545878| 0.6848649| 1.0663715|
 |diabetes     | 0.7961340| 0.5730458| 1.1060710|
-|ckd      | 0.8875632| 0.5684104| 1.3859149|
+|chronic kidney disease      | 0.8875632| 0.5684104| 1.3859149|
 |insurance   | 1.2391050| 0.9339267| 1.6440060|
 
 
 \setstretch{2.0} 
 
+The logistic regression analysis presented in the table identifies several significant predictors of food security, coded as 1 for food secure and 0 for food insecure individuals. Females are less likely to be food secure compared to males, with an odds ratio (OR) of 0.8882700, while age shows a positive association, with each additional year increasing the odds of food security (OR = 1.0242605). Racial disparities are evident, with Non-Hispanic Whites more likely to be food secure (OR = 1.6626392) compared to the reference group of Mexican Americans. Education level is a strong predictor, with higher education correlating to increased food security, particularly for college graduates or above (OR = 3.7148680). Marital status impacts food security, with married individuals or those living with a partner being the reference group; widowed, divorced, or separated individuals have lower odds of food security (OR = 0.7185600). Family income also plays a significant role; higher family income are associated with increased odds of food security (OR = 2.0249656). Health conditions like high blood pressure, diabetes, and chronic kidney disease are associated with lower odds of food security. Notably, having insurance is linked to higher odds of being food secure (OR = 1.2391050). These findings highlight the multifaceted nature of food security, influenced by a complex interplay of demographic, socioeconomic, and health factors.
 
 ## 3.3 Machine Learning Results
 
