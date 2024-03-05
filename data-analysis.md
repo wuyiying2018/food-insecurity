@@ -8,7 +8,7 @@ Yiying Wu
 ``` r
 # INSTALL PACKAGES
 packages <- c("tidyverse", "knitr", "haven","gtsummary",
-              "survey", "mice","jtools","surveyCV")
+              "survey", "mice","jtools","surveyCV","rpms")
 
 # Install missing packages
 installed_packages <- packages %in% rownames(installed.packages())
@@ -171,23 +171,23 @@ dat %>%
   bold_labels()
 ```
 
-<div id="insebsxfgi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#insebsxfgi table {
+<div id="flnvfqdeux" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#flnvfqdeux table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#insebsxfgi thead, #insebsxfgi tbody, #insebsxfgi tfoot, #insebsxfgi tr, #insebsxfgi td, #insebsxfgi th {
+#flnvfqdeux thead, #flnvfqdeux tbody, #flnvfqdeux tfoot, #flnvfqdeux tr, #flnvfqdeux td, #flnvfqdeux th {
   border-style: none;
 }
 
-#insebsxfgi p {
+#flnvfqdeux p {
   margin: 0;
   padding: 0;
 }
 
-#insebsxfgi .gt_table {
+#flnvfqdeux .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -213,12 +213,12 @@ dat %>%
   border-left-color: #D3D3D3;
 }
 
-#insebsxfgi .gt_caption {
+#flnvfqdeux .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#insebsxfgi .gt_title {
+#flnvfqdeux .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -230,7 +230,7 @@ dat %>%
   border-bottom-width: 0;
 }
 
-#insebsxfgi .gt_subtitle {
+#flnvfqdeux .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -242,7 +242,7 @@ dat %>%
   border-top-width: 0;
 }
 
-#insebsxfgi .gt_heading {
+#flnvfqdeux .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -254,13 +254,13 @@ dat %>%
   border-right-color: #D3D3D3;
 }
 
-#insebsxfgi .gt_bottom_border {
+#flnvfqdeux .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#insebsxfgi .gt_col_headings {
+#flnvfqdeux .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -275,7 +275,7 @@ dat %>%
   border-right-color: #D3D3D3;
 }
 
-#insebsxfgi .gt_col_heading {
+#flnvfqdeux .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -295,7 +295,7 @@ dat %>%
   overflow-x: hidden;
 }
 
-#insebsxfgi .gt_column_spanner_outer {
+#flnvfqdeux .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -307,15 +307,15 @@ dat %>%
   padding-right: 4px;
 }
 
-#insebsxfgi .gt_column_spanner_outer:first-child {
+#flnvfqdeux .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#insebsxfgi .gt_column_spanner_outer:last-child {
+#flnvfqdeux .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#insebsxfgi .gt_column_spanner {
+#flnvfqdeux .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -327,11 +327,11 @@ dat %>%
   width: 100%;
 }
 
-#insebsxfgi .gt_spanner_row {
+#flnvfqdeux .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#insebsxfgi .gt_group_heading {
+#flnvfqdeux .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -357,7 +357,7 @@ dat %>%
   text-align: left;
 }
 
-#insebsxfgi .gt_empty_group_heading {
+#flnvfqdeux .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -372,15 +372,15 @@ dat %>%
   vertical-align: middle;
 }
 
-#insebsxfgi .gt_from_md > :first-child {
+#flnvfqdeux .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#insebsxfgi .gt_from_md > :last-child {
+#flnvfqdeux .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#insebsxfgi .gt_row {
+#flnvfqdeux .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -399,7 +399,7 @@ dat %>%
   overflow-x: hidden;
 }
 
-#insebsxfgi .gt_stub {
+#flnvfqdeux .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -412,7 +412,7 @@ dat %>%
   padding-right: 5px;
 }
 
-#insebsxfgi .gt_stub_row_group {
+#flnvfqdeux .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -426,15 +426,15 @@ dat %>%
   vertical-align: top;
 }
 
-#insebsxfgi .gt_row_group_first td {
+#flnvfqdeux .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#insebsxfgi .gt_row_group_first th {
+#flnvfqdeux .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#insebsxfgi .gt_summary_row {
+#flnvfqdeux .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -444,16 +444,16 @@ dat %>%
   padding-right: 5px;
 }
 
-#insebsxfgi .gt_first_summary_row {
+#flnvfqdeux .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#insebsxfgi .gt_first_summary_row.thick {
+#flnvfqdeux .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#insebsxfgi .gt_last_summary_row {
+#flnvfqdeux .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -463,7 +463,7 @@ dat %>%
   border-bottom-color: #D3D3D3;
 }
 
-#insebsxfgi .gt_grand_summary_row {
+#flnvfqdeux .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -473,7 +473,7 @@ dat %>%
   padding-right: 5px;
 }
 
-#insebsxfgi .gt_first_grand_summary_row {
+#flnvfqdeux .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -483,7 +483,7 @@ dat %>%
   border-top-color: #D3D3D3;
 }
 
-#insebsxfgi .gt_last_grand_summary_row_top {
+#flnvfqdeux .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -493,11 +493,11 @@ dat %>%
   border-bottom-color: #D3D3D3;
 }
 
-#insebsxfgi .gt_striped {
+#flnvfqdeux .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#insebsxfgi .gt_table_body {
+#flnvfqdeux .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -506,7 +506,7 @@ dat %>%
   border-bottom-color: #D3D3D3;
 }
 
-#insebsxfgi .gt_footnotes {
+#flnvfqdeux .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -520,7 +520,7 @@ dat %>%
   border-right-color: #D3D3D3;
 }
 
-#insebsxfgi .gt_footnote {
+#flnvfqdeux .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -529,7 +529,7 @@ dat %>%
   padding-right: 5px;
 }
 
-#insebsxfgi .gt_sourcenotes {
+#flnvfqdeux .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -543,7 +543,7 @@ dat %>%
   border-right-color: #D3D3D3;
 }
 
-#insebsxfgi .gt_sourcenote {
+#flnvfqdeux .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -551,63 +551,63 @@ dat %>%
   padding-right: 5px;
 }
 
-#insebsxfgi .gt_left {
+#flnvfqdeux .gt_left {
   text-align: left;
 }
 
-#insebsxfgi .gt_center {
+#flnvfqdeux .gt_center {
   text-align: center;
 }
 
-#insebsxfgi .gt_right {
+#flnvfqdeux .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#insebsxfgi .gt_font_normal {
+#flnvfqdeux .gt_font_normal {
   font-weight: normal;
 }
 
-#insebsxfgi .gt_font_bold {
+#flnvfqdeux .gt_font_bold {
   font-weight: bold;
 }
 
-#insebsxfgi .gt_font_italic {
+#flnvfqdeux .gt_font_italic {
   font-style: italic;
 }
 
-#insebsxfgi .gt_super {
+#flnvfqdeux .gt_super {
   font-size: 65%;
 }
 
-#insebsxfgi .gt_footnote_marks {
+#flnvfqdeux .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#insebsxfgi .gt_asterisk {
+#flnvfqdeux .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#insebsxfgi .gt_indent_1 {
+#flnvfqdeux .gt_indent_1 {
   text-indent: 5px;
 }
 
-#insebsxfgi .gt_indent_2 {
+#flnvfqdeux .gt_indent_2 {
   text-indent: 10px;
 }
 
-#insebsxfgi .gt_indent_3 {
+#flnvfqdeux .gt_indent_3 {
   text-indent: 15px;
 }
 
-#insebsxfgi .gt_indent_4 {
+#flnvfqdeux .gt_indent_4 {
   text-indent: 20px;
 }
 
-#insebsxfgi .gt_indent_5 {
+#flnvfqdeux .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -932,6 +932,16 @@ write.csv(res_m1, "./result_files/res_m1.csv")
 
 ## for the machine learning model
 
+Some algorithms can handle missing data internally. For instance,
+tree-based methods like Random Forests can work with missing values.
+Skip the imputation part and directly go to the modeling part.
+
+The function folds.svy() generates design-based fold IDs for K-fold CV,
+using any specified strata and clusters. Briefly: For a stratified
+sample, each fold will contain data from each stratum. For a cluster
+sample, a given cluster’s rows will all be assigned to the same fold.
+(<https://onlinelibrary.wiley.com/doi/10.1002/sta4.454>)
+
 plan to use the `surveyCV` package
 
 <https://github.com/ColbyStatSvyRsch/surveyCV>
@@ -939,3 +949,57 @@ plan to use the `surveyCV` package
 <https://stats.stackexchange.com/questions/238141/two-worlds-collide-using-ml-for-complex-survey-data>
 
 <https://cran.r-project.org/web/packages/surveyCV/index.html>
+
+This is only a draft
+
+``` r
+# Generate fold IDs that account for clustering in the survey design
+set.seed(100)
+nfolds <- 3
+dat_subset <- dat[which(dat$age >= 20), ]
+dat_subset <- as.data.frame(dat_subset)
+
+dat_subset<-na.omit(dat_subset) # need to do imputation here
+num_clusters <- length(unique(dat_subset$sdmvpsu))
+nfolds <- min(nfolds, num_clusters)
+dat_subset$.foldID <- folds.svy(dat_subset, nfolds = nfolds,  clusterID = "sdmvpsu")
+
+# Use CV to tune the bin_size parameter of rpms_forest()
+bin_sizes <- c(10, 20, 50, 100, 250, 500)
+SSEs <- rep(0, length(bin_sizes))
+for(ff in 1:nfolds) {
+  train <- subset(dat_subset, .foldID != ff)
+  test  <- subset(dat_subset, .foldID == ff)
+  for(bb in 1:length(bin_sizes)) {
+    rf <- rpms_forest(food_security~gender+age+
+    race+country_of_birth+bmi+
+    education+marital_status+ poverty+
+    hbp+ diabetes+ckd+insurance, 
+                      data = train,
+                      weights = ~wtmecprp, strata = ~sdmvstra,
+                      clusters = ~sdmvpsu,
+                      bin_size = bin_sizes[bb], f_size = 50)
+    yhat <- predict(rf, newdata = test)
+    res2 <- (yhat - test$food_security)^2
+    # Sum up weighted SSEs, not MSEs yet,
+    # b/c cluster sizes may differ across folds and b/c of survey weights
+    SSEs[bb] <- SSEs[bb] + sum(res2 * test$wtmecprp)
+  }
+}
+# Divide entire weighted sum by the sum of weights
+MSEs <- SSEs / sum(dat_subset$wtmecprp)
+# Show results
+cbind(bin_sizes, MSEs)
+```
+
+    ##      bin_sizes      MSEs
+    ## [1,]        10 0.1413094
+    ## [2,]        20 0.1401991
+    ## [3,]        50 0.1392922
+    ## [4,]       100 0.1389139
+    ## [5,]       250 0.1405726
+    ## [6,]       500 0.1435085
+
+rpms package
+
+<https://cran.r-project.org/web/packages/rpms/rpms.pdf>
