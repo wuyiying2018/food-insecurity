@@ -8,7 +8,8 @@ Yiying Wu
 ``` r
 # INSTALL PACKAGES
 packages <- c("tidyverse", "knitr", "haven","gtsummary",
-              "survey", "mice","jtools","surveyCV","rpms")
+              "survey", "mice","jtools","surveyCV",
+              "rpms","pROC")
 
 # Install missing packages
 installed_packages <- packages %in% rownames(installed.packages())
@@ -171,23 +172,23 @@ dat %>%
   bold_labels()
 ```
 
-<div id="flnvfqdeux" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#flnvfqdeux table {
+<div id="wtemgljixh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wtemgljixh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#flnvfqdeux thead, #flnvfqdeux tbody, #flnvfqdeux tfoot, #flnvfqdeux tr, #flnvfqdeux td, #flnvfqdeux th {
+#wtemgljixh thead, #wtemgljixh tbody, #wtemgljixh tfoot, #wtemgljixh tr, #wtemgljixh td, #wtemgljixh th {
   border-style: none;
 }
 
-#flnvfqdeux p {
+#wtemgljixh p {
   margin: 0;
   padding: 0;
 }
 
-#flnvfqdeux .gt_table {
+#wtemgljixh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -213,12 +214,12 @@ dat %>%
   border-left-color: #D3D3D3;
 }
 
-#flnvfqdeux .gt_caption {
+#wtemgljixh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#flnvfqdeux .gt_title {
+#wtemgljixh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -230,7 +231,7 @@ dat %>%
   border-bottom-width: 0;
 }
 
-#flnvfqdeux .gt_subtitle {
+#wtemgljixh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -242,7 +243,7 @@ dat %>%
   border-top-width: 0;
 }
 
-#flnvfqdeux .gt_heading {
+#wtemgljixh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -254,13 +255,13 @@ dat %>%
   border-right-color: #D3D3D3;
 }
 
-#flnvfqdeux .gt_bottom_border {
+#wtemgljixh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#flnvfqdeux .gt_col_headings {
+#wtemgljixh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -275,7 +276,7 @@ dat %>%
   border-right-color: #D3D3D3;
 }
 
-#flnvfqdeux .gt_col_heading {
+#wtemgljixh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -295,7 +296,7 @@ dat %>%
   overflow-x: hidden;
 }
 
-#flnvfqdeux .gt_column_spanner_outer {
+#wtemgljixh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -307,15 +308,15 @@ dat %>%
   padding-right: 4px;
 }
 
-#flnvfqdeux .gt_column_spanner_outer:first-child {
+#wtemgljixh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#flnvfqdeux .gt_column_spanner_outer:last-child {
+#wtemgljixh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#flnvfqdeux .gt_column_spanner {
+#wtemgljixh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -327,11 +328,11 @@ dat %>%
   width: 100%;
 }
 
-#flnvfqdeux .gt_spanner_row {
+#wtemgljixh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#flnvfqdeux .gt_group_heading {
+#wtemgljixh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -357,7 +358,7 @@ dat %>%
   text-align: left;
 }
 
-#flnvfqdeux .gt_empty_group_heading {
+#wtemgljixh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -372,15 +373,15 @@ dat %>%
   vertical-align: middle;
 }
 
-#flnvfqdeux .gt_from_md > :first-child {
+#wtemgljixh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#flnvfqdeux .gt_from_md > :last-child {
+#wtemgljixh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#flnvfqdeux .gt_row {
+#wtemgljixh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -399,7 +400,7 @@ dat %>%
   overflow-x: hidden;
 }
 
-#flnvfqdeux .gt_stub {
+#wtemgljixh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -412,7 +413,7 @@ dat %>%
   padding-right: 5px;
 }
 
-#flnvfqdeux .gt_stub_row_group {
+#wtemgljixh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -426,15 +427,15 @@ dat %>%
   vertical-align: top;
 }
 
-#flnvfqdeux .gt_row_group_first td {
+#wtemgljixh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#flnvfqdeux .gt_row_group_first th {
+#wtemgljixh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#flnvfqdeux .gt_summary_row {
+#wtemgljixh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -444,16 +445,16 @@ dat %>%
   padding-right: 5px;
 }
 
-#flnvfqdeux .gt_first_summary_row {
+#wtemgljixh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#flnvfqdeux .gt_first_summary_row.thick {
+#wtemgljixh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#flnvfqdeux .gt_last_summary_row {
+#wtemgljixh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -463,7 +464,7 @@ dat %>%
   border-bottom-color: #D3D3D3;
 }
 
-#flnvfqdeux .gt_grand_summary_row {
+#wtemgljixh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -473,7 +474,7 @@ dat %>%
   padding-right: 5px;
 }
 
-#flnvfqdeux .gt_first_grand_summary_row {
+#wtemgljixh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -483,7 +484,7 @@ dat %>%
   border-top-color: #D3D3D3;
 }
 
-#flnvfqdeux .gt_last_grand_summary_row_top {
+#wtemgljixh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -493,11 +494,11 @@ dat %>%
   border-bottom-color: #D3D3D3;
 }
 
-#flnvfqdeux .gt_striped {
+#wtemgljixh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#flnvfqdeux .gt_table_body {
+#wtemgljixh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -506,7 +507,7 @@ dat %>%
   border-bottom-color: #D3D3D3;
 }
 
-#flnvfqdeux .gt_footnotes {
+#wtemgljixh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -520,7 +521,7 @@ dat %>%
   border-right-color: #D3D3D3;
 }
 
-#flnvfqdeux .gt_footnote {
+#wtemgljixh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -529,7 +530,7 @@ dat %>%
   padding-right: 5px;
 }
 
-#flnvfqdeux .gt_sourcenotes {
+#wtemgljixh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -543,7 +544,7 @@ dat %>%
   border-right-color: #D3D3D3;
 }
 
-#flnvfqdeux .gt_sourcenote {
+#wtemgljixh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -551,63 +552,63 @@ dat %>%
   padding-right: 5px;
 }
 
-#flnvfqdeux .gt_left {
+#wtemgljixh .gt_left {
   text-align: left;
 }
 
-#flnvfqdeux .gt_center {
+#wtemgljixh .gt_center {
   text-align: center;
 }
 
-#flnvfqdeux .gt_right {
+#wtemgljixh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#flnvfqdeux .gt_font_normal {
+#wtemgljixh .gt_font_normal {
   font-weight: normal;
 }
 
-#flnvfqdeux .gt_font_bold {
+#wtemgljixh .gt_font_bold {
   font-weight: bold;
 }
 
-#flnvfqdeux .gt_font_italic {
+#wtemgljixh .gt_font_italic {
   font-style: italic;
 }
 
-#flnvfqdeux .gt_super {
+#wtemgljixh .gt_super {
   font-size: 65%;
 }
 
-#flnvfqdeux .gt_footnote_marks {
+#wtemgljixh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#flnvfqdeux .gt_asterisk {
+#wtemgljixh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#flnvfqdeux .gt_indent_1 {
+#wtemgljixh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#flnvfqdeux .gt_indent_2 {
+#wtemgljixh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#flnvfqdeux .gt_indent_3 {
+#wtemgljixh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#flnvfqdeux .gt_indent_4 {
+#wtemgljixh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#flnvfqdeux .gt_indent_5 {
+#wtemgljixh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -950,8 +951,6 @@ plan to use the `surveyCV` package
 
 <https://cran.r-project.org/web/packages/surveyCV/index.html>
 
-This is only a draft
-
 ``` r
 # Generate fold IDs that account for clustering in the survey design
 set.seed(100)
@@ -959,13 +958,15 @@ nfolds <- 3
 dat_subset <- dat[which(dat$age >= 20), ]
 dat_subset <- as.data.frame(dat_subset)
 
-dat_subset<-na.omit(dat_subset) # need to do imputation here
+dat_subset<-na.omit(dat_subset) 
 num_clusters <- length(unique(dat_subset$sdmvpsu))
 nfolds <- min(nfolds, num_clusters)
 dat_subset$.foldID <- folds.svy(dat_subset, nfolds = nfolds,  clusterID = "sdmvpsu")
 
 # Use CV to tune the bin_size parameter of rpms_forest()
 bin_sizes <- c(10, 20, 50, 100, 250, 500)
+
+# model selection based on MSE
 SSEs <- rep(0, length(bin_sizes))
 for(ff in 1:nfolds) {
   train <- subset(dat_subset, .foldID != ff)
@@ -999,6 +1000,44 @@ cbind(bin_sizes, MSEs)
     ## [4,]       100 0.1389139
     ## [5,]       250 0.1405726
     ## [6,]       500 0.1435085
+
+Use AUC instead of MSE:
+
+``` r
+AUCs <- rep(0, length(bin_sizes))
+for(ff in 1:nfolds) {
+  train <- subset(dat_subset, .foldID != ff)
+  test  <- subset(dat_subset, .foldID == ff)
+  for(bb in 1:length(bin_sizes)) {
+    rf <- rpms_forest(food_security~gender+age+
+    race+country_of_birth+bmi+
+    education+marital_status+ poverty+
+    hbp+ diabetes+ckd+insurance, 
+                      data = train,
+                      weights = ~wtmecprp, strata = ~sdmvstra,
+                      clusters = ~sdmvpsu,
+                      bin_size = bin_sizes[bb], f_size = 50)
+    yhat <- predict(rf, newdata = test, type = "response") # Ensure predictions are on the scale of probabilities
+    # Calculate AUC
+    roc_obj <- roc(test$food_security, yhat, weights = test$wtmecprp, quiet = TRUE)
+    AUCs[bb] <- AUCs[bb] + auc(roc_obj)
+  }
+}
+# Average AUCs over folds
+AUCs <- AUCs / nfolds
+# Show results
+cbind(bin_sizes, AUCs)
+```
+
+    ##      bin_sizes      AUCs
+    ## [1,]        10 0.8311572
+    ## [2,]        20 0.8401272
+    ## [3,]        50 0.8392618
+    ## [4,]       100 0.8399933
+    ## [5,]       250 0.8391070
+    ## [6,]       500 0.8357517
+
+we can select $bin\_sizes=20$ and get the highest $AUC=0.8401272$
 
 rpms package
 

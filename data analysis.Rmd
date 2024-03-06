@@ -13,7 +13,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r,warning=FALSE,message=FALSE}
 # INSTALL PACKAGES
 packages <- c("tidyverse", "knitr", "haven","gtsummary",
-              "survey", "mice","jtools","surveyCV","rpms")
+              "survey", "mice","jtools","surveyCV",
+              "rpms","pROC")
 
 # Install missing packages
 installed_packages <- packages %in% rownames(installed.packages())
@@ -310,8 +311,6 @@ https://stats.stackexchange.com/questions/238141/two-worlds-collide-using-ml-for
 
 https://cran.r-project.org/web/packages/surveyCV/index.html
 
-This is only a draft
-
 ```{r}
 # Generate fold IDs that account for clustering in the survey design
 set.seed(100)
@@ -319,13 +318,15 @@ nfolds <- 3
 dat_subset <- dat[which(dat$age >= 20), ]
 dat_subset <- as.data.frame(dat_subset)
 
-dat_subset<-na.omit(dat_subset) # need to do imputation here
+dat_subset<-na.omit(dat_subset) 
 num_clusters <- length(unique(dat_subset$sdmvpsu))
 nfolds <- min(nfolds, num_clusters)
 dat_subset$.foldID <- folds.svy(dat_subset, nfolds = nfolds,  clusterID = "sdmvpsu")
 
 # Use CV to tune the bin_size parameter of rpms_forest()
 bin_sizes <- c(10, 20, 50, 100, 250, 500)
+
+# model selection based on MSE
 SSEs <- rep(0, length(bin_sizes))
 for(ff in 1:nfolds) {
   train <- subset(dat_subset, .foldID != ff)
@@ -351,6 +352,33 @@ MSEs <- SSEs / sum(dat_subset$wtmecprp)
 # Show results
 cbind(bin_sizes, MSEs)
 ```
+Use AUC instead of MSE:
+```{r}
+AUCs <- rep(0, length(bin_sizes))
+for(ff in 1:nfolds) {
+  train <- subset(dat_subset, .foldID != ff)
+  test  <- subset(dat_subset, .foldID == ff)
+  for(bb in 1:length(bin_sizes)) {
+    rf <- rpms_forest(food_security~gender+age+
+    race+country_of_birth+bmi+
+    education+marital_status+ poverty+
+    hbp+ diabetes+ckd+insurance, 
+                      data = train,
+                      weights = ~wtmecprp, strata = ~sdmvstra,
+                      clusters = ~sdmvpsu,
+                      bin_size = bin_sizes[bb], f_size = 50)
+    yhat <- predict(rf, newdata = test, type = "response") # Ensure predictions are on the scale of probabilities
+    # Calculate AUC
+    roc_obj <- roc(test$food_security, yhat, weights = test$wtmecprp, quiet = TRUE)
+    AUCs[bb] <- AUCs[bb] + auc(roc_obj)
+  }
+}
+# Average AUCs over folds
+AUCs <- AUCs / nfolds
+# Show results
+cbind(bin_sizes, AUCs)
+```
+we can select $bin\_sizes=20$ and get the highest $AUC=0.8401272$
 
 rpms package
 
