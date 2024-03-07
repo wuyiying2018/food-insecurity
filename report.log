@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.21)  21 FEB 2024 21:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.6)  6 MAR 2024 19:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -633,49 +633,44 @@ LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 16
 (/Users/yiyingwu/Library/TinyTeX/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ) [2]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 187.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 188.
 (/Users/yiyingwu/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Underfull \hbox (badness 10000) in paragraph at lines 193--194
-[][]$\T1/ptm/m/n/12 https : / / stats . stackexchange . com / questions / 238141 / two -[] worlds -[] collide -[] using -[] ml -[] for -[] complex -[]
- []
-
-[3{/Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}]
-Overfull \hbox (35.19325pt too wide) in alignment at lines 207--252
+Overfull \hbox (35.19325pt too wide) in alignment at lines 222--267
  [] [] [] 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 254--255
+[3{/Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 269--270
 
  []
 
-[4] [5] [6] [7] [8] (./report.aux)
+[5] [6] [7] [8] (./report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 20F86C419557AC875EF02962BD068C82;2055.
+(rerunfilecheck)             Checksum: 931C0EB1753AE6A18634B02AA1849F2C;2083.
  )
 (\end occurred inside a group at level 1)
 
-### semi simple group (level 1) entered at line 287 (\begingroup)
+### semi simple group (level 1) entered at line 302 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 14101 strings out of 476097
- 223233 string characters out of 5792747
+ 14102 strings out of 476076
+ 223255 string characters out of 5791948
  1956187 words of memory out of 5000000
- 35891 multiletter control sequences out of 15000+600000
- 609297 words of font info for 119 fonts, out of 8000000 for 9000
+ 35913 multiletter control sequences out of 15000+600000
+ 610941 words of font info for 120 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,10n,79p,369b,517s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,79p,369b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (8 pages, 103319 bytes).
+Output written on report.pdf (8 pages, 108111 bytes).
 PDF statistics:
- 168 PDF objects out of 1000 (max. 8388607)
- 140 compressed objects within 2 object streams
+ 165 PDF objects out of 1000 (max. 8388607)
+ 137 compressed objects within 2 object streams
  37 named destinations out of 1000 (max. 500000)
  105 words of extra memory for PDF output out of 10000 (max. 10000000)
 

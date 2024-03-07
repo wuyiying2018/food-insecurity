@@ -172,23 +172,23 @@ dat %>%
   bold_labels()
 ```
 
-<div id="wtemgljixh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wtemgljixh table {
+<div id="taxpmyetac" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#taxpmyetac table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wtemgljixh thead, #wtemgljixh tbody, #wtemgljixh tfoot, #wtemgljixh tr, #wtemgljixh td, #wtemgljixh th {
+#taxpmyetac thead, #taxpmyetac tbody, #taxpmyetac tfoot, #taxpmyetac tr, #taxpmyetac td, #taxpmyetac th {
   border-style: none;
 }
 
-#wtemgljixh p {
+#taxpmyetac p {
   margin: 0;
   padding: 0;
 }
 
-#wtemgljixh .gt_table {
+#taxpmyetac .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -214,12 +214,12 @@ dat %>%
   border-left-color: #D3D3D3;
 }
 
-#wtemgljixh .gt_caption {
+#taxpmyetac .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wtemgljixh .gt_title {
+#taxpmyetac .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -231,7 +231,7 @@ dat %>%
   border-bottom-width: 0;
 }
 
-#wtemgljixh .gt_subtitle {
+#taxpmyetac .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -243,7 +243,7 @@ dat %>%
   border-top-width: 0;
 }
 
-#wtemgljixh .gt_heading {
+#taxpmyetac .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -255,13 +255,13 @@ dat %>%
   border-right-color: #D3D3D3;
 }
 
-#wtemgljixh .gt_bottom_border {
+#taxpmyetac .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wtemgljixh .gt_col_headings {
+#taxpmyetac .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -276,7 +276,7 @@ dat %>%
   border-right-color: #D3D3D3;
 }
 
-#wtemgljixh .gt_col_heading {
+#taxpmyetac .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -296,7 +296,7 @@ dat %>%
   overflow-x: hidden;
 }
 
-#wtemgljixh .gt_column_spanner_outer {
+#taxpmyetac .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -308,15 +308,15 @@ dat %>%
   padding-right: 4px;
 }
 
-#wtemgljixh .gt_column_spanner_outer:first-child {
+#taxpmyetac .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wtemgljixh .gt_column_spanner_outer:last-child {
+#taxpmyetac .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wtemgljixh .gt_column_spanner {
+#taxpmyetac .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -328,11 +328,11 @@ dat %>%
   width: 100%;
 }
 
-#wtemgljixh .gt_spanner_row {
+#taxpmyetac .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wtemgljixh .gt_group_heading {
+#taxpmyetac .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -358,7 +358,7 @@ dat %>%
   text-align: left;
 }
 
-#wtemgljixh .gt_empty_group_heading {
+#taxpmyetac .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -373,15 +373,15 @@ dat %>%
   vertical-align: middle;
 }
 
-#wtemgljixh .gt_from_md > :first-child {
+#taxpmyetac .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wtemgljixh .gt_from_md > :last-child {
+#taxpmyetac .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wtemgljixh .gt_row {
+#taxpmyetac .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -400,7 +400,7 @@ dat %>%
   overflow-x: hidden;
 }
 
-#wtemgljixh .gt_stub {
+#taxpmyetac .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -413,7 +413,7 @@ dat %>%
   padding-right: 5px;
 }
 
-#wtemgljixh .gt_stub_row_group {
+#taxpmyetac .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -427,15 +427,15 @@ dat %>%
   vertical-align: top;
 }
 
-#wtemgljixh .gt_row_group_first td {
+#taxpmyetac .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wtemgljixh .gt_row_group_first th {
+#taxpmyetac .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wtemgljixh .gt_summary_row {
+#taxpmyetac .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -445,16 +445,16 @@ dat %>%
   padding-right: 5px;
 }
 
-#wtemgljixh .gt_first_summary_row {
+#taxpmyetac .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wtemgljixh .gt_first_summary_row.thick {
+#taxpmyetac .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wtemgljixh .gt_last_summary_row {
+#taxpmyetac .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -464,7 +464,7 @@ dat %>%
   border-bottom-color: #D3D3D3;
 }
 
-#wtemgljixh .gt_grand_summary_row {
+#taxpmyetac .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -474,7 +474,7 @@ dat %>%
   padding-right: 5px;
 }
 
-#wtemgljixh .gt_first_grand_summary_row {
+#taxpmyetac .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -484,7 +484,7 @@ dat %>%
   border-top-color: #D3D3D3;
 }
 
-#wtemgljixh .gt_last_grand_summary_row_top {
+#taxpmyetac .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -494,11 +494,11 @@ dat %>%
   border-bottom-color: #D3D3D3;
 }
 
-#wtemgljixh .gt_striped {
+#taxpmyetac .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wtemgljixh .gt_table_body {
+#taxpmyetac .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -507,7 +507,7 @@ dat %>%
   border-bottom-color: #D3D3D3;
 }
 
-#wtemgljixh .gt_footnotes {
+#taxpmyetac .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -521,7 +521,7 @@ dat %>%
   border-right-color: #D3D3D3;
 }
 
-#wtemgljixh .gt_footnote {
+#taxpmyetac .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -530,7 +530,7 @@ dat %>%
   padding-right: 5px;
 }
 
-#wtemgljixh .gt_sourcenotes {
+#taxpmyetac .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -544,7 +544,7 @@ dat %>%
   border-right-color: #D3D3D3;
 }
 
-#wtemgljixh .gt_sourcenote {
+#taxpmyetac .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -552,63 +552,63 @@ dat %>%
   padding-right: 5px;
 }
 
-#wtemgljixh .gt_left {
+#taxpmyetac .gt_left {
   text-align: left;
 }
 
-#wtemgljixh .gt_center {
+#taxpmyetac .gt_center {
   text-align: center;
 }
 
-#wtemgljixh .gt_right {
+#taxpmyetac .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wtemgljixh .gt_font_normal {
+#taxpmyetac .gt_font_normal {
   font-weight: normal;
 }
 
-#wtemgljixh .gt_font_bold {
+#taxpmyetac .gt_font_bold {
   font-weight: bold;
 }
 
-#wtemgljixh .gt_font_italic {
+#taxpmyetac .gt_font_italic {
   font-style: italic;
 }
 
-#wtemgljixh .gt_super {
+#taxpmyetac .gt_super {
   font-size: 65%;
 }
 
-#wtemgljixh .gt_footnote_marks {
+#taxpmyetac .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wtemgljixh .gt_asterisk {
+#taxpmyetac .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wtemgljixh .gt_indent_1 {
+#taxpmyetac .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wtemgljixh .gt_indent_2 {
+#taxpmyetac .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wtemgljixh .gt_indent_3 {
+#taxpmyetac .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wtemgljixh .gt_indent_4 {
+#taxpmyetac .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wtemgljixh .gt_indent_5 {
+#taxpmyetac .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -914,7 +914,8 @@ res_df<-function(model){
     OR = exp(model$coef$b.pool)
     ci.low = exp(model$coef$lower.ci)
     ci.up = exp(model$coef$upper.ci)
-    res<-data_frame(coef.names,OR,ci.low,ci.up)
+    p_value=model$coef$pvalue.pool
+    res<-data_frame(coef.names,OR,ci.low,ci.up,p_value)
     return(res)
 }
 res_m1<-res_df(model1)
@@ -1038,6 +1039,29 @@ cbind(bin_sizes, AUCs)
     ## [6,]       500 0.8357517
 
 we can select $bin\_sizes=20$ and get the highest $AUC=0.8401272$
+
+ROC curve
+
+``` r
+train <- subset(dat_subset, .foldID != 1)
+test  <- subset(dat_subset, .foldID == 1)
+rf <- rpms_forest(food_security~gender+age+
+    race+country_of_birth+bmi+
+    education+marital_status+ poverty+
+    hbp+ diabetes+ckd+insurance, 
+                      data = train,
+                      weights = ~wtmecprp, strata = ~sdmvstra,
+                      clusters = ~sdmvpsu,
+                      bin_size = 20, f_size = 50)
+yhat <- predict(rf, newdata = test, type = "response") # Ensure predictions are on the scale of probabilities
+# Calculate AUC
+roc_obj <- roc(test$food_security, yhat, weights = test$wtmecprp, quiet = TRUE)
+
+# Plotting the ROC curve
+plot(roc_obj, main = "ROC Curve", col = "#1c61b6", lwd = 2)
+```
+
+![](data-analysis_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
 rpms package
 

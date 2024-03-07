@@ -286,7 +286,8 @@ res_df<-function(model){
     OR = exp(model$coef$b.pool)
     ci.low = exp(model$coef$lower.ci)
     ci.up = exp(model$coef$upper.ci)
-    res<-data_frame(coef.names,OR,ci.low,ci.up)
+    p_value=model$coef$pvalue.pool
+    res<-data_frame(coef.names,OR,ci.low,ci.up,p_value)
     return(res)
 }
 res_m1<-res_df(model1)
@@ -379,6 +380,30 @@ AUCs <- AUCs / nfolds
 cbind(bin_sizes, AUCs)
 ```
 we can select $bin\_sizes=20$ and get the highest $AUC=0.8401272$
+
+ROC curve
+```{r}
+train <- subset(dat_subset, .foldID != 1)
+test  <- subset(dat_subset, .foldID == 1)
+rf <- rpms_forest(food_security~gender+age+
+    race+country_of_birth+bmi+
+    education+marital_status+ poverty+
+    hbp+ diabetes+ckd+insurance, 
+                      data = train,
+                      weights = ~wtmecprp, strata = ~sdmvstra,
+                      clusters = ~sdmvpsu,
+                      bin_size = 20, f_size = 50)
+yhat <- predict(rf, newdata = test, type = "response") # Ensure predictions are on the scale of probabilities
+# Calculate AUC
+roc_obj <- roc(test$food_security, yhat, weights = test$wtmecprp, quiet = TRUE)
+
+# Plotting the ROC curve
+plot(roc_obj, main = "ROC Curve", col = "#1c61b6", lwd = 2)
+
+```
+
+
+
 
 rpms package
 

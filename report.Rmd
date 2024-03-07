@@ -1,5 +1,5 @@
 ---
-title: "First Analysis Write-Up"
+title: "Second Analysis Write-Up"
 author: "Yiying Wu (yw3996)"
 date: ""
 output: 
@@ -67,22 +67,17 @@ $$
 
 In the logistic regression analysis for survey data, I have integrated multiple imputation and complex survey design in NHANES. Each imputed dataset was then individually analyzed with logistic regression models, incorporating essential survey design elements like stratification and weights via the survey package. Lastly, these results are aggregated to derive final estimates using Rubin’s multiple imputation combining rule (Rubin, 2018).
 
-## 2.5 Machine Learning Method
+## 2.5 Random Forest for Prediction
 
-plan to use the `surveyCV` package
+The function folds.svy() in the `surveyCV` package generates design-based fold IDs for K-fold CV, using any specified strata and clusters. For a stratified sample, each fold will contain data from each stratum. For a cluster sample, a given cluster's rows will all be assigned to the same fold. (Wieczorek, J., Guerin, C., & McMahon, T., 2022)
 
-some useful links:
+A cross-validation procedure is conducted to optimize the bin_size parameter of a Random Forest model tailored for survey data, particularly considering the clustering inherent to the dataset. The number of cross-validation folds are adjusted to the lesser of the initially intended folds or the number of unique clusters, ensuring an equitable representation of clusters across folds.
 
-https://github.com/ColbyStatSvyRsch/surveyCV
-
-https://stats.stackexchange.com/questions/238141/two-worlds-collide-using-ml-for-complex-survey-data
-
-https://cran.r-project.org/web/packages/surveyCV/index.html
-
+To navigate the parameter tuning, a range of bin_size values is established, and for each fold in the cross-validation, the dataset is split into training and testing sets based on fold IDs that account for the survey's clustering. The Random Forest model is then trained on these subsets with varying bin_size parameters, alongside considerations for survey weights, stratification, and clustering within the model. Predictions are generated for the test set, and the Area Under the Curve (AUC) metric is calculated for these predictions against actual outcomes, adjusted by survey weights to accurately reflect model performance across different bin_size settings.
 
 # 3. Results
 ## 3.1 Descriptive Statistics
-\newpage
+
 \begin{singlespace}
 ```{r echo=FALSE, messgae=FALSE, warning=FALSE}
 my_dat <- read_csv("result_files/dat.csv")%>%
@@ -162,37 +157,37 @@ res1 %>%
 \begin{center}
 Table 2: Summary of Regression Coefficients with Odds Ratios and Confidence Intervals
 \end{center}
-|**coef names**  | **OR**|  **CI low**|  **CI up**|
+|**coef names**  | **OR**|  **CI (95%)**|  **p value**|
 |:----------------|---------:|---------:|---------:|
-|Intercept        | 0.0865675| 0.0455321| 0.1645858|
+|Intercept        | 0.0866| (0.0455, 0.1646) | $<.001$ |
 |gender           |  |  |  |
-|\quad male       | ref | ref | ref |
-|\quad female     | 0.8882700| 0.7938057| 0.9939758|
-|age              | 1.0242605| 1.0165347| 1.0320450|
+|\quad male       | ref | - | - |
+|\quad female     | 0.8883| (0.7938, 0.9940) | 0.0389 |
+|age              | 1.0243| (1.0165, 1.0320) | $<.001$ |
 |race      | | | |
-|\quad Mexican American      | ref| ref| ref|
-|\quad Other Hispanic      | 0.6944784| 0.4787410| 1.0074344|
-|\quad Non-Hispanic White  | 1.6626392| 1.0989956| 2.5153595|
-|\quad Non-Hispanic Black    | 1.1297815| 0.7313368| 1.7453055|
-|\quad Non-Hispanic Asian    | 1.7310878| 1.1105557| 2.6983472|
-|\quad Other Race - Including Multi-Racial    | 0.7473892| 0.3991244| 1.3995402|
-|not born in U.S. | 1.1155619| 0.8022678| 1.5512006|
-|bmi     | 0.9850796| 0.9752864| 0.9949711|
+|\quad Mexican American      | ref| - | - |
+|\quad Other Hispanic      | 0.6945 | (0.4787, 1.0074) | 0.0547 |
+|\quad Non-Hispanic White  | 1.6626 | (1.0990, 2.5154) | 0.0161 |
+|\quad Non-Hispanic Black    | 1.1298| (0.7313, 1.7453) | 0.5824 |
+|\quad Non-Hispanic Asian    | 1.7311| (1.1106, 2.6983) | 0.0154 |
+|\quad Other Race - Including Multi-Racial  | 0.7474| (0.3991, 1.3995) | 0.3630 |
+|not born in U.S. | 1.1156| (0.8023, 1.5512) | 0.5156 |
+|bmi     | 0.9851| (0.9753, 0.9950) | 0.0032 |
 |education       | | | |
-|\quad Less than 9th grade   | ref| ref| ref|
-|\quad 9-11th grade| 1.3439491| 0.9764702| 1.8497227|
-|\quad High school graduate/GED or equivalent  | 1.6825892| 1.2053256| 2.3488314|
-|\quad Some college or AA degree | 2.1286519| 1.6312931| 2.7776485|
-|\quad College graduate or above  | 3.7148680| 2.7390089| 5.0384081|
+|\quad Less than 9th grade   | ref| - | - |
+|\quad 9-11th grade| 1.3439| (0.9765, 1.8497) | 0.0697 |
+|\quad High school graduate/GED or equivalent  | 1.6826| (1.2053, 2.3488) | 0.0022 |
+|\quad Some college or AA degree | 2.1287| (1.6313, 2.7776) | $<.001$ |
+|\quad College graduate or above  | 3.7149| (2.7390, 5.0384) | $<.001$ |
 |marital status  | | | |
-|\quad Married/Living with Partner  | ref| ref| ref|
-|\quad Widowed/Divorced/Separated  | 0.7185600| 0.5343786| 0.9662221|
-|\quad Never married | 0.8816866| 0.6728986| 1.1552577|
-|family income  | 2.0249656| 1.8245303| 2.2474199|
-|high blood pressure,    | 0.8545878| 0.6848649| 1.0663715|
-|diabetes     | 0.7961340| 0.5730458| 1.1060710|
-|chronic kidney disease      | 0.8875632| 0.5684104| 1.3859149|
-|insurance   | 1.2391050| 0.9339267| 1.6440060|
+|\quad Married/Living with Partner  | ref| -| -|
+|\quad Widowed/Divorced/Separated  | 0.7186| (0.5344, 0.9662) | 0.0287 |
+|\quad Never married | 0.8817| (0.6729, 1.1553) | 0.3611|
+|family income  | 2.0250| (1.8245, 2.2474) | $<.001$ |
+|high blood pressure,    | 0.8546| (0.6849, 1.0664) | 0.1642 |
+|diabetes     | 0.7961| (0.5730, 1.1061) | 0.1741 |
+|chronic kidney disease      | 0.8876 | (0.5684, 1.3859) | 0.5999 |
+|insurance   | 1.2391| (0.9339, 1.6440) | 0.1372 |
 
 
 \setstretch{2.0} 
@@ -201,6 +196,9 @@ The logistic regression analysis presented in the table identifies several signi
 
 ## 3.3 Machine Learning Results
 
+we can select $bin\_sizes=20$ and get the highest $AUC=0.8401272$
+
+We have a AUC of 0.84, indicating a high level of accuracy in the model's predictive performance.
 
 # 4. Conclusion
 
@@ -210,3 +208,4 @@ The logistic regression analysis presented in the table identifies several signi
 # Reference
 Rubin, D.B. (2018). Flexible Imputation of Missing Data, Second Edition. Chapman and Hall/CRC.
 
+Wieczorek, J., Guerin, C., & McMahon, T. (2022). K-fold cross-validation for complex sample surveys. Stat, 11(1). https://doi.org/10.1002/sta4.454
