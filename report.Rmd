@@ -234,19 +234,18 @@ The strong AUC value suggests that the combination of these variables (Gender, a
 
 # 4. Conclusion
 
-This report use the NHANES 2017-March 2020 dataset to examine food security among U.S. adults aged 20 and above. The study analyzes use logistic regression and Random Forest models, addressing the intricacies of survey datasets. The regression analysis uncovers significant demographic, socioeconomic, and health-related predictors of food security, evidencing that age, race, education, and health insurance are pivotal factors.
+The report leverages the NHANES 2017-March 2020 dataset to shed light on food security among U.S. adults. Through rigorous logistic regression and Random Forest models, the study navigates the complexity of survey data to reveal pivotal demographic, socioeconomic, and health-related predictors of food security.
 
-The logistic regression analysis underscores the multifactorial dimensions that converge to affect food security status among individuals. Demographic factors such as gender and race exhibit significant influence, with females and Non-Hispanic Black individuals being less likely to enjoy food security compared to their male and Non-Hispanic White counterparts, respectively. Age emerges as a protective factor, wherein a higher age is correlated with an increased likelihood of being food secure.
+The regression analysis delineates the interplay of factors such as gender, age, race, education, and health insurance, painting a nuanced portrait of food security determinants. Key findings illustrate the vulnerability of females and Non-Hispanic Black individuals to food insecurity, while also positioning age, higher education levels, and family income as buffers against it. The analysis stresses the significance of marital status and the adverse impact of chronic health conditions on food security.
 
-Socioeconomic indicators, specifically education and family income, stand out as potent determinants of food security. Higher educational attainment, especially at the college level and beyond, markedly enhances the odds of being food secure, highlighting the role of education in economic stability and access to resources. Similarly, higher family income is strongly associated with food security, reflecting the critical importance of financial means in ensuring consistent access to food.
+Moreover, the Random Forest model, with its robust validation via design-based K-fold cross-validation, underscores an optimal bin size of 20, reflecting a model of high proficiency as indicated by the highest AUC of 0.8401. This model's capacity to discern food security status is evidenced by its close proximity to the top left corner of the ROC curve, indicating a substantial discriminative ability.
 
-Marital status further contributes to this complex scenario, where individuals who are widowed, divorced, or separated are found to be at a disadvantage in terms of food security when compared to those who are married or living with a partner, suggesting the potential buffering effect of shared household resources.
+The report's findings are instrumental for policymakers, social workers, and healthcare providers in formulating targeted interventions. By understanding the intricate factors affecting food security, efforts can be directed towards supporting the most susceptible populations, ensuring equitable access to food resources, and fostering overall health and well-being.
 
-The intersection of health and food security is evidenced by the negative association of chronic health conditions such as high blood pressure, diabetes, and chronic kidney disease with the likelihood of being food secure, indicating that health challenges can compound the risk of food insecurity.
+Future research avenues could expand on these findings by exploring additional variables, utilizing more recent data to reflect post-pandemic circumstances, and investigating the longitudinal impact of the identified factors on food security trends. Further studies could also delve into the causal relationships between these variables and food security, offering deeper insights into effective intervention strategies.
 
-Notably, the presence of health insurance emerges as a key factor, enhancing the probability of food security. This may reflect the broader accessibility to healthcare resources and the mitigating effect of medical coverage on the economic impact of health issues.
+The final recommendations of this report advocate for a multidisciplinary approach in addressing food insecurity, involving education, healthcare, economic policies, and social support systems. Implementing comprehensive policies that tackle the root causes identified in this analysis has the potential to significantly reduce food insecurity and enhance the quality of life for affected individuals across the United States.
 
-The Random Forest model, validated using design-based K-fold cross-validation, further elucidates the predictive power of these variables. The optimal bin size of 20, denoted by the highest AUC of 0.8401, underscores a model proficient in discerning food security status.
 
 \newpage
 # Reference

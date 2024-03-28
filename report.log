@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.9)  27 MAR 2024 21:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.9)  27 MAR 2024 21:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -674,7 +674,7 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  75i,10n,79p,369b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (11 pages, 192988 bytes).
+Output written on report.pdf (11 pages, 192917 bytes).
 PDF statistics:
  181 PDF objects out of 1000 (max. 8388607)
  148 compressed objects within 2 object streams
