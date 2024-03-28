@@ -1,5 +1,5 @@
 ---
-title: "Second Analysis Write-Up"
+title: "Conclusion Write-Up"
 author: "Yiying Wu (yw3996)"
 date: ""
 output: 
@@ -142,7 +142,7 @@ The provided table summarizes characteristics of individuals divided into two gr
 \newpage
 
 ## 3.2 Regression Analysis Results
-```{r echo=FALSE, messgae=FALSE, warning=FALSE}
+```{r, echo=FALSE, messgae=FALSE, warning=FALSE}
 res1 <- read_csv("result_files/res_m1.csv")
 ```
 
@@ -194,11 +194,43 @@ Table 2: Summary of Regression Coefficients with Odds Ratios and Confidence Inte
 
 The logistic regression analysis presented in the table identifies several significant predictors of food security, coded as 1 for food secure and 0 for food insecure individuals. Females are less likely to be food secure compared to males, with an odds ratio (OR) of 0.8882700, while age shows a positive association, with each additional year increasing the odds of food security (OR = 1.0242605). Racial disparities are evident, with Non-Hispanic Whites more likely to be food secure (OR = 1.6626392) compared to the reference group of Mexican Americans. Education level is a strong predictor, with higher education correlating to increased food security, particularly for college graduates or above (OR = 3.7148680). Marital status impacts food security, with married individuals or those living with a partner being the reference group; widowed, divorced, or separated individuals have lower odds of food security (OR = 0.7185600). Family income also plays a significant role; higher family income are associated with increased odds of food security (OR = 2.0249656). Health conditions like high blood pressure, diabetes, and chronic kidney disease are associated with lower odds of food security. Notably, having insurance is linked to higher odds of being food secure (OR = 1.2391050). These findings highlight the multifaceted nature of food security, influenced by a complex interplay of demographic, socioeconomic, and health factors.
 
-## 3.3 Machine Learning Results
+## 3.3 Random Forest Results
 
-we can select $bin\_sizes=20$ and get the highest $AUC=0.8401272$
+```{r, echo=FALSE,include=FALSE}
+res <- read_csv("result_files/res_m2.csv")
 
-We have a AUC of 0.84, indicating a high level of accuracy in the model's predictive performance.
+res %>% 
+   select(bin_sizes, AUCs) %>%
+   knitr::kable(digits = 4)
+```
+
+\begingroup
+\setstretch{1.0} 
+\begin{center}
+Table 3: AUC Values Across Different Bin Sizes for Random Forest Model
+\end{center}
+| **bin sizes**|   **AUCs**|
+|---------:|------:|
+|        10| 0.8312|
+|        20| 0.8401|
+|        50| 0.8393|
+|       100| 0.8400|
+|       250| 0.8391|
+|       500| 0.8358|
+
+\setstretch{2.0} 
+
+From the table, it is apparent that the highest AUC value is achieved at a bin size of 20 with an AUC of 0.8401. This suggests that, of the bin sizes tested, a bin size of 20 provides the best model performance in terms of the Area Under the Receiver Operating Characteristic (ROC) Curve, which is a common measure of the accuracy of a predictive model.
+
+The ROC curve of the final model is
+
+```{r, echo=FALSE, fig.align='center', out.width="80%", out.height="100%"}
+knitr::include_graphics("result_files/roc_plot.png")
+```
+
+The ROC curve plot further illustrates the model's diagnostic ability. The curve shows the trade-off between sensitivity (true positive rate) and specificity (1 - false positive rate) across different thresholds. A perfect model would follow the left-hand border and then the top border of the ROC space, which would correspond to an AUC of 1. In this case, the curve is closer to the top left corner, suggesting a good level of discrimination.
+
+The strong AUC value suggests that the combination of these variables (Gender, age, race, Country of birth, BMI, education level, marital status, poverty status, High blood pressure (HBP), diabetes, chronic kidney disease (CKD), Health Insurance) provides substantial information that the model can use to accurately identify patterns that differentiate between individuals who are food secure and those who are not.
 
 # 4. Conclusion
 

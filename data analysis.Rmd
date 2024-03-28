@@ -378,7 +378,19 @@ for(ff in 1:nfolds) {
 AUCs <- AUCs / nfolds
 # Show results
 cbind(bin_sizes, AUCs)
+
 ```
+```{r}
+# Combine the bin sizes and their corresponding AUCs into a dataframe
+results <- data.frame(bin_sizes = bin_sizes, AUCs = AUCs)
+
+results %>% 
+   knitr::kable(digits = 4)
+
+# save res
+write.csv(results, "./result_files/res_m2.csv")
+```
+
 we can select $bin\_sizes=20$ and get the highest $AUC=0.8401272$
 
 ROC curve
@@ -403,6 +415,9 @@ plot(roc_obj, main = "ROC Curve", col = "#1c61b6", lwd = 2)
 ```
 
 
+
+
+  
 
 
 rpms package
