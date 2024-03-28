@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.9)  27 MAR 2024 21:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.9)  27 MAR 2024 21:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -652,7 +652,7 @@ File: result_files/roc_plot.png Graphic file (type png)
 <use result_files/roc_plot.png>
 Package pdftex.def Info: result_files/roc_plot.png  used on input line 418.
 (pdftex.def)             Requested size: 375.76665pt x 235.04587pt.
-[8 <./result_files/roc_plot.png>] [9] [10] (./report.aux)
+[8 <./result_files/roc_plot.png>] [9] [10] [11] (./report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -666,18 +666,18 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 ### semi simple group (level 1) entered at line 302 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 14116 strings out of 476076
- 223602 string characters out of 5791948
- 1956187 words of memory out of 5000000
+ 14117 strings out of 476076
+ 223609 string characters out of 5791948
+ 1955187 words of memory out of 5000000
  35924 multiletter control sequences out of 15000+600000
  609297 words of font info for 119 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,10n,79p,369b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></Users/yiyingwu/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (10 pages, 190783 bytes).
+Output written on report.pdf (11 pages, 192988 bytes).
 PDF statistics:
- 177 PDF objects out of 1000 (max. 8388607)
- 145 compressed objects within 2 object streams
- 40 named destinations out of 1000 (max. 500000)
+ 181 PDF objects out of 1000 (max. 8388607)
+ 148 compressed objects within 2 object streams
+ 41 named destinations out of 1000 (max. 500000)
  110 words of extra memory for PDF output out of 10000 (max. 10000000)
 

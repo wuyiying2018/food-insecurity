@@ -192,7 +192,7 @@ Table 2: Summary of Regression Coefficients with Odds Ratios and Confidence Inte
 
 \setstretch{2.0} 
 
-The logistic regression analysis presented in the table identifies several significant predictors of food security, coded as 1 for food secure and 0 for food insecure individuals. Females are less likely to be food secure compared to males, with an odds ratio (OR) of 0.8882700, while age shows a positive association, with each additional year increasing the odds of food security (OR = 1.0242605). Racial disparities are evident, with Non-Hispanic Whites more likely to be food secure (OR = 1.6626392) compared to the reference group of Mexican Americans. Education level is a strong predictor, with higher education correlating to increased food security, particularly for college graduates or above (OR = 3.7148680). Marital status impacts food security, with married individuals or those living with a partner being the reference group; widowed, divorced, or separated individuals have lower odds of food security (OR = 0.7185600). Family income also plays a significant role; higher family income are associated with increased odds of food security (OR = 2.0249656). Health conditions like high blood pressure, diabetes, and chronic kidney disease are associated with lower odds of food security. Notably, having insurance is linked to higher odds of being food secure (OR = 1.2391050). These findings highlight the multifaceted nature of food security, influenced by a complex interplay of demographic, socioeconomic, and health factors.
+The logistic regression analysis presented in the table identifies several significant predictors of food security, coded as 1 for food secure and 0 for food insecure individuals. Females are less likely to be food secure compared to males, with an odds ratio (OR) of 0.8883, while age shows a positive association, with each additional year increasing the odds of food security (OR = 1.0243). Racial disparities are evident, with Non-Hispanic Whites more likely to be food secure (OR = 1.6626) compared to the reference group of Mexican Americans. Education level is a strong predictor, with higher education correlating to increased food security, particularly for college graduates or above (OR = 3.7149). Marital status impacts food security, with married individuals or those living with a partner being the reference group; widowed, divorced, or separated individuals have lower odds of food security (OR = 0.7186). Family income also plays a significant role; higher family income are associated with increased odds of food security (OR = 2.0250). Health conditions like high blood pressure, diabetes, and chronic kidney disease are associated with lower odds of food security. Notably, having insurance is linked to higher odds of being food secure (OR = 1.2391). These findings highlight the multifaceted nature of food security, influenced by a complex interplay of demographic, socioeconomic, and health factors.
 
 ## 3.3 Random Forest Results
 
@@ -234,7 +234,19 @@ The strong AUC value suggests that the combination of these variables (Gender, a
 
 # 4. Conclusion
 
+This report use the NHANES 2017-March 2020 dataset to examine food security among U.S. adults aged 20 and above. The study analyzes use logistic regression and Random Forest models, addressing the intricacies of survey datasets. The regression analysis uncovers significant demographic, socioeconomic, and health-related predictors of food security, evidencing that age, race, education, and health insurance are pivotal factors.
 
+The logistic regression analysis underscores the multifactorial dimensions that converge to affect food security status among individuals. Demographic factors such as gender and race exhibit significant influence, with females and Non-Hispanic Black individuals being less likely to enjoy food security compared to their male and Non-Hispanic White counterparts, respectively. Age emerges as a protective factor, wherein a higher age is correlated with an increased likelihood of being food secure.
+
+Socioeconomic indicators, specifically education and family income, stand out as potent determinants of food security. Higher educational attainment, especially at the college level and beyond, markedly enhances the odds of being food secure, highlighting the role of education in economic stability and access to resources. Similarly, higher family income is strongly associated with food security, reflecting the critical importance of financial means in ensuring consistent access to food.
+
+Marital status further contributes to this complex scenario, where individuals who are widowed, divorced, or separated are found to be at a disadvantage in terms of food security when compared to those who are married or living with a partner, suggesting the potential buffering effect of shared household resources.
+
+The intersection of health and food security is evidenced by the negative association of chronic health conditions such as high blood pressure, diabetes, and chronic kidney disease with the likelihood of being food secure, indicating that health challenges can compound the risk of food insecurity.
+
+Notably, the presence of health insurance emerges as a key factor, enhancing the probability of food security. This may reflect the broader accessibility to healthcare resources and the mitigating effect of medical coverage on the economic impact of health issues.
+
+The Random Forest model, validated using design-based K-fold cross-validation, further elucidates the predictive power of these variables. The optimal bin size of 20, denoted by the highest AUC of 0.8401, underscores a model proficient in discerning food security status.
 
 \newpage
 # Reference
