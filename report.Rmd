@@ -1,21 +1,30 @@
 ---
-title: "Conclusion Write-Up"
+title: "Analyzing Food Security: Socioeconomic and Health Determinants in U.S. Adults"
 author: "Yiying Wu (yw3996)"
 date: ""
 output: 
   pdf_document:
     latex_engine: pdflatex
+    toc: yes
+    toc_depth: 1
 header-includes:
    - \usepackage{mathptmx} # Times New Roman font or similar
    - \usepackage{setspace} # Package for setting spacing
    - \usepackage[margin=1in]{geometry} # Adjust page margins if needed
    - \doublespacing # Command to apply double spacing
+   - \usepackage{fancyhdr}
+   - \usepackage{lipsum}
+   - \pagestyle{fancy}
+   - \fancyhead[R]{Yiying Wu}
+   - \fancyhead[L]{Columbia University}
+   - \fancypagestyle{plain}{\pagestyle{fancy}}
+editor_options: 
+  chunk_output_type: console
 fontsize: 12pt
-classoption: doublespace
 ---
 
 
-
+  
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       message = FALSE,
@@ -28,13 +37,21 @@ library(knitr)
 library(kableExtra)
 ```
 
-**Note: All codes are available here**: https://github.com/wuyiying2018/food-insecurity
+\setstretch{2.0} 
+\newpage
+# Abstract
+This report investigates the multifaceted issue of food insecurity among U.S. adults, utilizing data from the National Health and Nutrition Examination Survey (NHANES) from 2017 to March 2020. By applying logistic regression and Random Forest models, this study elucidates the relationship between food insecurity and various demographic, socioeconomic, and health-related factors. Key findings highlight the significant impact of gender, age, race, education level, and health insurance status on food security. Specifically, females and Non-Hispanic Black populations are more vulnerable to food insecurity, while higher education and income levels serve as protective factors. The analysis leverages advanced statistical techniques, including multiple imputation to address missing data and complex survey design considerations, ensuring robust and reliable findings. The Random Forest model, validated through design-based K-fold cross-validation, confirms the predictive power of these factors with a high area under the curve (AUC) measure. Insights from this report are crucial for policymakers, social workers, and healthcare providers in designing targeted interventions to combat food insecurity effectively. Future research is directed towards exploring additional variables and assessing the longitudinal impact of identified factors on food security trends in the post-pandemic era.
 
+**Key words: Food Insecurity: NHANES, Logistic Regression, Random Forest, Socioeconomic Factors, Health Disparities, Predictive Modeling, Public Health Policy**
+
+\newpage
 # 1. Introduction
+Food insecurity serves as a critical measure of nutritional well-being and is defined as a condition that exists when the availability of nutritionally adequate and safe foods, or the ability to acquire acceptable foods in socially acceptable ways, is limited or uncertain (Anderson, 1990). In 2018, approximately 11.1% of households in the US reported experiencing food insecurity (Coleman-Jensen et al., 2019), highlighting its significance as a public health issue. This concern is amplified by the well-documented associations between food insecurity and a range of chronic diseases (Laraia, 2013). Our study aims to explore the various factors that contribute to food insecurity among US adults, seeking to understand the underlying dynamics that predispose individuals to this precarious condition.
 
-
+\setstretch{1.0} 
 # 2. Methodology
 ## 2.1 Data sources
+\setstretch{2.0} 
 The dataset used in the report is the NHANES 2017-March 2020 dataset. This survey is conducted, and the data is collected by the National Center for Health Statistics (NCHS) from 2017 to March 2020. 
 
 The NHANES 2019-2020 field operations were suspended in March 2020 due to the COVID-19 pandemic, resulting in incomplete data collection that is not nationally representative. To address this issue and ensure national representativeness, the partially collected 2019-2020 data were merged with the complete 2017-2018 dataset, creating a combined dataset representative of the U.S. civilian non-institutionalized population before the pandemic. The dataset contains demographic, socioeconomic, dietary, and health-related information. 
@@ -75,6 +92,8 @@ A cross-validation procedure is conducted to optimize the bin_size parameter of 
 
 To navigate the parameter tuning, a range of bin_size values is established, and for each fold in the cross-validation, the dataset is split into training and testing sets based on fold IDs that account for the survey's clustering. The Random Forest model is then trained on these subsets with varying bin_size parameters, alongside considerations for survey weights, stratification, and clustering within the model. Predictions are generated for the test set, and the Area Under the Curve (AUC) metric is calculated for these predictions against actual outcomes, adjusted by survey weights to accurately reflect model performance across different bin_size settings.
 
+\newpage
+\setstretch{1.0} 
 # 3. Results
 ## 3.1 Descriptive Statistics
 
@@ -136,6 +155,8 @@ dat %>%
   gt::tab_header("Table 1: Summary of Dataset by Food Security")
 ```
 \end{singlespace}
+
+\setstretch{2.0} 
 
 The provided table summarizes characteristics of individuals divided into two groups based on food security status, with 3,163 facing food insecurity and 5,380 enjoying food security. A closer analysis reveals a similar gender distribution across both groups, a slightly younger median age in the food insecurity group (48 years) compared to the food security group (54 years), and marked differences in racial composition, notably with a higher percentage of Non-Hispanic Black individuals in the food insecurity group. A substantial proportion of the food insecure were not born in the U.S. (32%), which is higher than in the food secure group. Educational attainment varies significantly, with individuals having less education predominantly in the food insecurity group, while higher education levels are more common among those with food security. Marital status also differs, with a greater proportion of married individuals or those living with a partner in the food security group. Economic disparity is evident in the family income levels, with the food security group reporting higher median values. Health-wise, instances of high blood pressure and diabetes are slightly more prevalent in the food security group, although chronic kidney disease remains low in both. Finally, insurance coverage is more widespread in the food security group (89%) compared to the food insecurity group (76%), highlighting a possible link between economic stability and access to healthcare.
 
@@ -240,15 +261,28 @@ The regression analysis delineates the interplay of factors such as gender, age,
 
 Moreover, the Random Forest model, with its robust validation via design-based K-fold cross-validation, underscores an optimal bin size of 20, reflecting a model of high proficiency as indicated by the highest AUC of 0.8401. This model's capacity to discern food security status is evidenced by its close proximity to the top left corner of the ROC curve, indicating a substantial discriminative ability.
 
-The report's findings are instrumental for policymakers, social workers, and healthcare providers in formulating targeted interventions. By understanding the intricate factors affecting food security, efforts can be directed towards supporting the most susceptible populations, ensuring equitable access to food resources, and fostering overall health and well-being.
+The report's findings are instrumental for policymakers, social workers, and healthcare providers in formulating targeted interventions, such as nutritional assistance programs tailored for at-risk demographics like Non-Hispanic Black communities and women, or educational initiatives aimed at improving health literacy among those with chronic conditions. 
 
-Future research avenues could expand on these findings by exploring additional variables, utilizing more recent data to reflect post-pandemic circumstances, and investigating the longitudinal impact of the identified factors on food security trends. Further studies could also delve into the causal relationships between these variables and food security, offering deeper insights into effective intervention strategies.
+Future research avenues could expand on these findings by exploring additional variables, utilizing more recent data to reflect post-pandemic circumstances, and investigating the longitudinal impact of the identified factors on food security trends. Further research might include a focus on the interplay between food deserts and insecurity or evaluate the success rates of existing food aid programs.
 
 The final recommendations of this report advocate for a multidisciplinary approach in addressing food insecurity, involving education, healthcare, economic policies, and social support systems. Implementing comprehensive policies that tackle the root causes identified in this analysis has the potential to significantly reduce food insecurity and enhance the quality of life for affected individuals across the United States.
 
 
 \newpage
 # Reference
-Rubin, D.B. (2018). Flexible Imputation of Missing Data, Second Edition. Chapman and Hall/CRC.
 
-Wieczorek, J., Guerin, C., & McMahon, T. (2022). K-fold cross-validation for complex sample surveys. Stat, 11(1). https://doi.org/10.1002/sta4.454
+- Anderson  SA. (1990). Core indicators of nutritional state for difficult-to-sample populations.  J Nutr. doi:10.1093/jn/120.suppl_11.1555
+- Coleman-Jensen  A, et al. (2019). Household Food Security in the United States in 2018. United States Department of Agriculture.
+- Laraia  BA. (2013). Food insecurity and chronic disease. Adv Nutr. doi:10.3945/an.112.003277
+- Rubin, D.B. (2018). Flexible Imputation of Missing Data, Second Edition. Chapman and Hall/CRC.
+- Wieczorek, J., Guerin, C., & McMahon, T. (2022). K-fold cross-validation for complex sample surveys. Stat, 11(1). https://doi.org/10.1002/sta4.454
+
+\newpage
+# Appendix
+**Note: All codes are available here**: https://github.com/wuyiying2018/food-insecurity
+
+```{r}
+# word count
+wordcountaddin::text_stats("report.Rmd")
+```
+
